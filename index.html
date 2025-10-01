@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Loading Scrapbook</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #fdf6f0;
+      font-family: 'Comic Sans MS', cursive;
+      flex-direction: column;
+    }
+    .loader {
+      text-align: center;
+      width: 300px;
+    }
+    .loading-text {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #444;
+    }
+    .emoji {
+      font-size: 50px;
+      animation: bounce 1s infinite;
+      cursor: default;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
+    }
+    .progress {
+      margin-top: 20px;
+      height: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    #progressBar {
+      background-color: #ffc107; /* kuning */
+    }
+    .name {
+      margin: 20px 0 0 0;
+      font-size: 28px;
+      font-weight: bold;
+      color: #b38600;
+      font-family: 'Comic Sans MS', cursive;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="loader">
+    <div class="emoji" id="emoji">🍹</div>
+    <div class="loading-text">Membuka penjualan Frey...</div>
+    <div class="progress w-75 mx-auto">
+      <div id="progressBar" 
+           class="progress-bar progress-bar-striped progress-bar-animated" 
+           role="progressbar" style="width: 0%">0%</div>
+    </div>
+    <div class="name">Frey Danielson</div>
+  </div>
+
+  <script>
+    const foodIcons = ['🍒', '🍑', '🥥', '🥐', '🍺'];
+    const emoji = document.getElementById('emoji');
+
+    let iconIndex = 0;
+    setInterval(() => {
+      iconIndex = (iconIndex + 1) % foodIcons.length;
+      emoji.textContent = foodIcons[iconIndex];
+    }, 1000); 
+
+    let progress = 0;
+    const progressBar = document.getElementById("progressBar");
+    const duration = 5000; 
+    const interval = 150;
+    const step = 100 / (duration / interval);
+    const timer = setInterval(() => {
+      progress += step;
+      if (progress >= 100) {
+        progress = 100;
+        clearInterval(timer);
+        window.location.href = "https://freygaming020.github.io/tugas-sekolah/";
+      }
+      progressBar.style.width = progress + "%";
+      progressBar.innerText = Math.floor(progress) + "%";
+    }, interval);
+  </script>
+</body>
+</html>
